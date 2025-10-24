@@ -1,0 +1,26 @@
+
+.number-roller-container {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  /*> div:first-child {
+    position: relative;
+    padding-right: 2px;
+
+    &:after {
+      content: '';
+      display: block;
+      height: 50%;
+      width: 1px;
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-45%);
+      background-color: wheat;
+    }
+  }*/
+}
+
+.countdown-finished {
+  font-size: 24px;
+  color: #4caf50;
+}
+

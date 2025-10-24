@@ -1,0 +1,109 @@
+
+.Intro {
+  &:after, &:before {
+    content: "";
+    display: block;
+    width: 20%;
+    aspect-ratio: 1/1;
+    position: absolute;
+    top: 0;
+    background-size: cover;
+    background-image: url("https://content.pancake.vn/1/fwebp/01/01/53/a6/107b40fff2db3985e6374bad6eb40b8bb6dfa91f0baa5d82e0bad933-w:313-h:313-l:8578-t:image/png.png");
+  }
+
+  &:before {
+    right: 0;
+    transform: scaleX(-1);
+  }
+
+  &:after {
+    left: 0;
+  }
+}
+
+.iimg {
+  position: relative;
+  background-repeat: no-repeat;
+  transform-style: preserve-3d;
+  background-image: url("https://content.pancake.vn/1/s517x776/fwebp/0c/1e/55/b7/066dc6a2283d0e9aa3d6452d5f0ee5cbd1e4695c0ed42458541c3f18-w:1706-h:2560-l:241524-t:image/jpeg.jpg");
+}
+
+.Box3dContainer {
+}
+
+@keyframes spinY {
+  from {
+    transform: perspective(1000px) rotateY(0deg);
+  }
+  to {
+    transform: perspective(1000px) rotateY(360deg);
+  }
+}
+.animate-pause {
+  animation-play-state: paused;
+}
+.animate-play {
+  animation: spinY 20s linear 1s infinite running;
+}
+
+
+.Box3D {
+  --w: 100%;
+  width: var(--w);
+  position: relative;
+  height: calc(var(--w) + 40px);
+  transform-style: preserve-3d;
+
+  transition: 1.5s;
+  animation-delay: 1s;
+  &:before {
+    content: "";
+    position: absolute;
+    width: var(--w);
+    height: var(--w);
+    background: rgba(34, 34, 34, 0.57);
+    z-index: 1000;
+    transform-origin: center;
+    transform: translateY(calc(var(--w) / 3 * 2)) rotateX(90deg) translateX(-50%) scale(.8);
+    filter: blur(50px);
+  }
+
+  .placeholder {
+    --i: 1;
+    position: absolute;
+    width: var(--w);
+    aspect-ratio: 1;
+    transform-origin: center;
+    transform-style: preserve-3d;
+    transform: rotateY(calc(var(--i) * 90deg)) translateZ(calc(var(--w) / 2 - 1px));
+  }
+
+  .img {
+    position: absolute;
+    inset: 0;
+    align-content: center;
+    background: #222222;
+  }
+}
+
+.image-container {
+  position: relative;
+  width: 100%; /* hoặc kích thước cụ thể */
+  height: 500px; /* điều chỉnh theo nhu cầu */
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.overlay-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
