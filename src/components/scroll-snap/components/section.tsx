@@ -18,7 +18,7 @@ export const XSection: FCC<{
     <InViewContext value={isInView}>
       <section
         ref={ref}
-        className="h-[100svh] flex justify-center items-center"
+        className="h-[100svh] flex justify-center items-center w-full"
         style={{
           scrollSnapAlign: 'start',
           background: color,

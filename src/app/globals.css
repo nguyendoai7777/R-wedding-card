@@ -12,9 +12,15 @@
   src: url("/fonts/SheliaVNFRegular.ttf");
 }
 
+@font-face {
+  font-family: "reshuffle";
+  src: url("/fonts/Reshuffle.ttf");
+}
+
 :root {
   --font-ephesis: ephesis;
   --font-shelia: shelia;
+  --font-reshuffle: reshuffle;
   --radius: 0.625rem;
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.13 0.028 261.692);
@@ -54,6 +60,7 @@
 @theme {
   --font-ephesis: var(--font-ephesis);
   --font-shelia: var(--font-shelia);
+  --font-reshuffle: var(--font-reshuffle);
   --color-main: var(--background);
   --color-xc-primary: var(--xc-primary);
   --color-xc-primary-light: var(--xc-primary-light);
@@ -150,7 +157,6 @@
 
   section {
     border-bottom: 1px solid white;
-    padding: .25rem;
     height: 100vh;
     scroll-snap-align: start;
     text-align: center;
@@ -185,4 +191,29 @@
       background-size: cover;
     }
   }
+}
+
+.first-bg {
+  background-image: url("/_first-bg.jpg");
+  background-repeat: no-repeat;
+}
+
+.underline-light {
+}
+
+@keyframes playing {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.is-playing {
+  animation: playing 10s linear infinite;
+}
+
+.is-pause {
+  animation-play-state: paused;
 }

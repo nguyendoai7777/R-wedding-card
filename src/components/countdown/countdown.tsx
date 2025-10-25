@@ -3,6 +3,7 @@ import './countdown.css';
 import { ReactElement, useEffect, useState } from 'react';
 import { Transition, Variants } from 'motion';
 import { AnimatePresence, motion } from 'motion/react';
+import { useSectionInView } from '@components';
 
 interface TimeLeft {
   days: number;
@@ -91,6 +92,7 @@ const map = {
 };
 export const CountdownRoller: FCC<CountdownProps> = ({ targetDate, className }) => {
   const [timeLeft, setTimeLeft] = useState<TimeLeft | {}>(calculateTimeLeft(targetDate));
+  const inView = useSectionInView();
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -104,15 +106,27 @@ export const CountdownRoller: FCC<CountdownProps> = ({ targetDate, className }) 
 
   const keys = Object.keys(timeLeft) as Array<keyof TimeLeft>;
 
-  keys.forEach((interval) => {
+  keys.forEach((interval, i) => {
     const value = (timeLeft as TimeLeft)[interval];
 
     if (value !== undefined) {
       timerComponents.push(
-        <div key={interval} className={`flex flex-col items-center ${className}`}>
+        <motion.div
+          key={interval}
+          initial={false}
+          animate={{
+            y: inView ? 0 : -40,
+            opacity: inView ? 1 : 0,
+          }}
+          transition={{
+            duration: 0.5,
+            delay: inView ? i * 0.25 : 0,
+          }}
+          className={`flex flex-col items-center ${className}`}
+        >
           <NumberRoller number={value} />
-          <span className="mt-1 text-sm capitalize text-gray-300/90">{map[interval]}</span>
-        </div>
+          <span className="text-ephesis mt-1 text-sm capitalize text-rose-700">{map[interval]}</span>
+        </motion.div>
       );
     }
   });

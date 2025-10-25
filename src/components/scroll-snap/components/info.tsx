@@ -3,9 +3,11 @@ import { motion } from 'motion/react';
 import { useEffect, useRef, useState } from 'react';
 import {useSectionInView} from "@components";
 
-export interface InfoProps {}
+export interface InfoProps {
+  src: string
+}
 
-export const Info: FCC<InfoProps> = () => {
+export const Info: FCC<InfoProps> = ({src}) => {
   const inView = useSectionInView();
   const containerRef = useRef<HTMLDivElement>(null);
   const cell = 15;
@@ -68,6 +70,7 @@ export const Info: FCC<InfoProps> = () => {
                   height: 'var(--size)',
                   backgroundSize: `${cell * 100}% ${row * 100}%`,
                   backgroundPosition: `${bgPosX}% ${bgPosY}%`,
+                  backgroundImage: `url(${src})`
                 }}
               />
             );

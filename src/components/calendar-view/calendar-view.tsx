@@ -62,13 +62,15 @@ export const CalendarView: FCC<CalendarViewProps> = () => {
   const inView = useSectionInView();
 
   return (
-    <div className={`max-w-[410px] w-full`}>
-
-      <div className="grid grid-cols-7 w-full CalendarView bg-xc-primary-light rounded-xl border-[2px] border-xc-primary">
+    <div className={`CalendarGrid w-full`}>
+      <div className="CalendarGrid mb-4 grid grid-cols-7 w-full CalendarView bg-xc-primary-light rounded-xl border-[2px] border-xc-primary/70">
         {DayName.map((d) => (
-          <div key={d.day} className="CalendarViewHeader aspect-square flex items-center justify-center border-b border-xc-primary">
+          <div
+            key={d.day}
+            className="CalendarViewHeader aspect-square flex items-center justify-center border-b border-xc-primary/80"
+          >
             <div className="mt-4">{d.day}</div>
-            <img className="decor" src="/icon/moc.svg"/>
+            <img className="decor" src="/icon/moc.svg" />
           </div>
         ))}
         {Days.map((d, i) => (
@@ -91,7 +93,6 @@ export const CalendarView: FCC<CalendarViewProps> = () => {
           </div>
         ))}
       </div>
-      <CountdownRoller targetDate="2025/10/31 10:30:00" className={`mt-2`} />
     </div>
   );
 };
