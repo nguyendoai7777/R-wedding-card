@@ -6,7 +6,7 @@ import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import dynamic from 'next/dynamic';
 import { Intro2 } from './components/info2';
 import Section4 from './components/section4';
-import Section1 from './components/section1';
+const Section1 = dynamic(() => import('./components/section1'), { ssr: false });
 const Intro = dynamic(() => import('./components/intro'), { ssr: false });
 export interface ScrollSnapCardProps {
   onSection?(index: number): void;
@@ -96,7 +96,7 @@ export const ScrollSnapCard: FCC<ScrollSnapCardProps> = ({ onSection, product = 
             /*navigator.clipboard.writeText(
               `${location.origin}/?my=${encodeURIComponent(sub.my)}&who=${encodeURIComponent(sub.who)}`
             );*/
-            fallbackCopyText(`${location.origin}/?my=${encodeURIComponent(sub.my)}&who=${encodeURIComponent(sub.who)}`)
+            fallbackCopyText(`${location.origin}/?my=${encodeURIComponent(sub.my)}&who=${encodeURIComponent(sub.who)}`);
           }}
         >
           Link mời
