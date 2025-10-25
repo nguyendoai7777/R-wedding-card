@@ -32,6 +32,7 @@ export const Section4: FCC<Section4Props> = ({ product, onSub }) => {
       setSub({
         who, my
       })
+      document.title = `Thân mời ${who}`
     }
   }, []);
   return (
