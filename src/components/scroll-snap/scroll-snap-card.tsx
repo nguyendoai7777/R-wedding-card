@@ -105,3 +105,4 @@ export const ScrollSnapCard: FCC<ScrollSnapCardProps> = ({ onSection, product = 
     </OverlayScrollbarsComponent>
   );
 };
+export default ScrollSnapCard;

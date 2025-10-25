@@ -1,11 +1,10 @@
-import Image from 'next/image';
-import { ScrollSnapCard } from '@components';
+import IdxPage from './idx';
 
 export default function Home() {
   return (
     <div className=" w-full">
       <div>
-        <ScrollSnapCard product />
+        <IdxPage />
       </div>
     </div>
   );
