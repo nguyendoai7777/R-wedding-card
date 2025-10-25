@@ -6,11 +6,13 @@ import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import dynamic from 'next/dynamic';
 import { Intro2 } from './components/info2';
 import Section4 from './components/section4';
+
 const Section1 = dynamic(() => import('./components/section1'), { ssr: false });
 const Intro = dynamic(() => import('./components/intro'), { ssr: false });
 export interface ScrollSnapCardProps {
   onSection?(index: number): void;
   product?: boolean;
+  ready: boolean
 }
 function fallbackCopyText(text: string) {
   const textarea = document.createElement('textarea');
@@ -22,13 +24,12 @@ function fallbackCopyText(text: string) {
   textarea.select();
   try {
     document.execCommand('copy');
-    alert('Đã copy!');
   } catch (err) {
     console.error('Fallback copy lỗi:', err);
   }
   document.body.removeChild(textarea);
 }
-export const ScrollSnapCard: FCC<ScrollSnapCardProps> = ({ onSection, product = false }) => {
+export const ScrollSnapCard: FCC<ScrollSnapCardProps> = ({ onSection, product = false, ready }) => {
   const [active, setActive] = useState(0);
   const containerRef = useRef<any>();
   const [sub, setSub] = useState({
@@ -50,30 +51,37 @@ export const ScrollSnapCard: FCC<ScrollSnapCardProps> = ({ onSection, product = 
         },
       }}
       defer
-      className="ScrollSnap max-w-[500px] mx-auto"
+      className="ScrollSnap"
       ref={containerRef}
     >
-      {product ? (
+      {/*{!product ? (
         <></>
       ) : (
         <XSection index={0} onInView={handleSection}>
+          <DoorPage />
+        </XSection>
+      )}*/}
+      {product ? (
+        <></>
+      ) : (
+        <XSection index={1} onInView={handleSection}>
           <Section4 onSub={setSub} product={product} />
         </XSection>
       )}
-      <XSection className="items-start" index={-1} onInView={handleSection}>
-        <Section1 />
+      <XSection className="items-start" index={5} onInView={handleSection}>
+        <Section1 product={product} ready={ready} />
       </XSection>
-      <XSection index={1} onInView={handleSection}>
+      <XSection index={2} onInView={handleSection}>
         <Intro />
       </XSection>
 
-      <XSection index={1} onInView={handleSection}>
+      <XSection index={3} onInView={handleSection}>
         <Intro2 />
       </XSection>
       {!product ? (
         <></>
       ) : (
-        <XSection index={0} onInView={handleSection}>
+        <XSection index={4} onInView={handleSection}>
           <Section4 onSub={setSub} product={product} />
         </XSection>
       )}

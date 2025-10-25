@@ -11,7 +11,7 @@ export const Create: FCC<CreateProps> = () => {
   return (
     <div className=" w-full">
       <div>
-        <ScrollSnapCard />F
+        <ScrollSnapCard ready />
       </div>
     </div>
   );

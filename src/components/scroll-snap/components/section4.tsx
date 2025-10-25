@@ -1,5 +1,5 @@
 'use client';
-import { useSearchParams } from 'next/navigation'
+import { useSearchParams } from 'next/navigation';
 
 import ButtonBase from '@mui/material/ButtonBase';
 import { LocationOn } from '@mui/icons-material';
@@ -7,6 +7,7 @@ import { CalendarView } from '../../calendar-view/calendar-view';
 import { useSectionInView } from '@components';
 import { motion } from 'motion/react';
 import { useEffect, useState } from 'react';
+import CountdownRoller from '../../countdown/countdown';
 
 export interface Section4Props {
   product: boolean;
@@ -23,52 +24,55 @@ export const Section4: FCC<Section4Props> = ({ product, onSub }) => {
     who: '',
     my: '',
   });
-  const searchParams = useSearchParams()
+  const searchParams = useSearchParams();
 
   useEffect(() => {
-  const who = decodeURIComponent(searchParams.get('who') ?? ''),
-    my = decodeURIComponent(searchParams.get('my') ?? '')
+    const who = decodeURIComponent(searchParams.get('who') ?? ''),
+      my = decodeURIComponent(searchParams.get('my') ?? '');
     if (product) {
       setSub({
-        who, my
-      })
-      document.title = `Thân mời ${who}`
+        who,
+        my,
+      });
+      document.head.title = `Thân mời $`;
     }
   }, []);
   return (
     <>
       <div className="h-full w-full px-4 flex flex-col justify-center">
-        <div className="text-5xl font-medium font-ephesis text-rose-700 mb-4">Thân mời</div>
         {product ? (
           <></>
         ) : (
-          <div className="flex gap-3">
-            <input
-              value={sub.who}
-              onChange={(e) => {
-                const v = e.target.value;
-                setSub({ ...sub, who: v });
-                onSub({ ...sub, my: v });
-              }}
-              placeholder="mời ai"
-              className="border-b border-gray-600 flex-1"
-            />
-            <input
-              value={sub.my}
-              onChange={(e) => {
-                const v = e.target.value;
-                setSub({ ...sub, my: v });
-                onSub({ ...sub, my: v });
-              }}
-              placeholder="của ai"
-              className="border-b border-gray-600 flex-1"
-            />
-          </div>
+          <>
+            <div className="flex gap-3">
+              <input
+                value={sub.who}
+                onChange={(e) => {
+                  const v = e.target.value;
+                  setSub({ ...sub, who: v });
+                  onSub({ ...sub, my: v });
+                }}
+                placeholder="mời ai"
+                className="border-b border-gray-600 flex-1"
+              />
+              <input
+                value={sub.my}
+                onChange={(e) => {
+                  const v = e.target.value;
+                  setSub({ ...sub, my: v });
+                  onSub({ ...sub, my: v });
+                }}
+                placeholder="của ai"
+                className="border-b border-gray-600 flex-1"
+              />
+            </div>
+            <div className="font-ephesis text-rose-700 text-2xl mt-4">
+              <b className="font-3xl">{sub.who.length ? sub.who : '...'}</b> đến dự lễ thành hôn của{' '}
+              {sub.my.length ? sub.my : '...'}
+            </div>
+          </>
         )}
-        <div className="font-ephesis text-rose-700 text-2xl mt-4">
-          <b className="font-3xl">{sub.who.length ? sub.who : '...'}</b> đến dự lễ thành hôn của{' '}
-          {sub.my.length ? sub.my : '...'}
-        </div>
+
         <div className="font-ephesis  text-2xl mb-3">
           <motion.div className="flex flex-wrap text-2xl leading-6">
             {words.map((word, index) => (
@@ -98,6 +102,7 @@ export const Section4: FCC<Section4Props> = ({ product, onSub }) => {
         </ButtonBase>
 
         <CalendarView />
+        <CountdownRoller targetDate="2025/10/31 10:00:00" className={`mt-2`} />
       </div>
     </>
   );
